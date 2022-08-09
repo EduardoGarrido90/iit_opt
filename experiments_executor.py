@@ -2,6 +2,7 @@
 import pgrs_algorithm as pgrs
 import random_search_baseline as rs
 import grid_search_baseline as gs
+import plot_results as pr
 import numpy as np
 
 #Experiment 2:
@@ -22,4 +23,11 @@ for iteration in range(iterations_experiment):
     rs_results.append(phis)
     best_phi, best_cm, best_tpm, best_state, individuals, phis = gs.main(D_min, D_max, T, iteration, debug=True)
     gs_results.append(phis)
+mean_pgrs_results = np.mean(pgrs_results, axis=0)
+mean_rs_results = np.mean(rs_results, axis=0)
+mean_gs_results = np.mean(gs_results, axis=0)
+std_pgrs_results = np.std(pgrs_results, axis=0)
+std_rs_results = np.std(rs_results, axis=0)
+std_gs_results = np.std(gs_results, axis=0)
+pr.plot_mean_and_std_dev(mean_pgrs_results, mean_rs_results, mean_gs_results, std_pgrs_results, std_rs_results, std_gs_results)
 import pdb; pdb.set_trace();
