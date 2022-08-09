@@ -30,4 +30,6 @@ std_pgrs_results = np.std(pgrs_results, axis=0)
 std_rs_results = np.std(rs_results, axis=0)
 std_gs_results = np.std(gs_results, axis=0)
 pr.plot_mean_and_std_dev(mean_pgrs_results, mean_rs_results, mean_gs_results, std_pgrs_results, std_rs_results, std_gs_results)
-import pdb; pdb.set_trace();
+pr.persist_results('pgrs_2', mean_pgrs_results)
+pr.persist_results('rs_2', mean_rs_results)
+pr.persist_results('gs_2', mean_gs_results)
