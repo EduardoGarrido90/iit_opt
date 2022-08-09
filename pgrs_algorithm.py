@@ -39,7 +39,9 @@ def sample_dimension(D_min, p_omega):
             break
     return dimension
 
-def main(D_min, D_max, epsilon, p_omega, mu, T, seed):
+def main(D_min, D_max, epsilon, p_omega, mu, T, seed, debug=True):
+    if debug:
+        return np.random.randint(1, 100, T)
     print('Random search of matrices')
     random.seed(seed)
     best_cm = []
@@ -48,6 +50,7 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed):
     best_phi = -1
     individuals = {}
     phi_evolution = {}
+    phis = np.zeros(T)
     while(i<T):
         print('Iteration ' + str(i))
         k=0
@@ -69,7 +72,8 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed):
                 except:
                     pass
                 j=j+1
-            phi_evolution[i] = [phi, nodes]
+            phi_evolution[i] = [best_local_phi, nodes]
+            phis[i] = best_local_phi
             individuals[i] = [{'phi': best_local_phi}, {'cm' : cm}, {'tpm' : tpm}, {'state': best_local_state}, {'nodes' : nodes}] 
             if best_local_phi > best_phi:
                 best_phi = best_local_phi
@@ -88,7 +92,7 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed):
     print('cm: ' + str(best_cm))
     print('tpm: ' + str(best_tpm))
     print('state: ' + str(best_state))
-    return best_phi, best_cm, best_tpm, best_state, individuals, phi_evolution
+    return best_phi, best_cm, best_tpm, best_state, individuals, phi_evolution, phis
 
 def test():
     print('It works')

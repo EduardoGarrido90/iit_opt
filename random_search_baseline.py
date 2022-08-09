@@ -3,7 +3,9 @@ import numpy as np
 import itertools
 import random
 
-def main(D_min, D_max, T, seed):
+def main(D_min, D_max, T, seed, debug=True):
+    if debug:
+        return np.random.randint(1, 100, T)
     print('Random search of matrices')
     random.seed(seed)
     best_cm = []
@@ -11,6 +13,7 @@ def main(D_min, D_max, T, seed):
     best_state = []
     best_phi = -1
     individuals = {}
+    phis = np.zeros(T)
     while(i<T):
         print('Iteration ' + str(i))
         nodes = np.random.randint(D_min, D_max+1)
@@ -31,6 +34,7 @@ def main(D_min, D_max, T, seed):
                 pass
             j=j+1
         individuals[i] = [{'phi': best_local_phi}, {'cm' : cm}, {'tpm' : tpm}, {'state': best_local_state}, {'nodes' : nodes}] 
+        phis[i] = best_local_phi
         if best_local_phi > best_phi:
             best_phi = best_local_phi
             best_cm = cm
@@ -46,7 +50,7 @@ def main(D_min, D_max, T, seed):
     print('cm: ' + str(best_cm))
     print('tpm: ' + str(best_tpm))
     print('state: ' + str(best_state))
-    return best_phi, best_cm, best_tpm, best_state, individuals
+    return best_phi, best_cm, best_tpm, best_state, individuals, phis
 
 def test():
     print('It works')
