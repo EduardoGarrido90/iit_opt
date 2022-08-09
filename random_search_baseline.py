@@ -5,7 +5,7 @@ import random
 
 def main(D_min, D_max, T, seed, debug=True):
     if debug:
-        return np.random.randint(1, 100, T)
+        return None, None, None, None, None, np.random.randint(1, 100, T)
     print('Random search of matrices')
     random.seed(seed)
     best_cm = []
