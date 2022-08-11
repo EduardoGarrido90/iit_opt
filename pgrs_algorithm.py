@@ -9,7 +9,7 @@ def return_last_batch(phi_evolution, epsilon, i):
     iterations = np.linspace(init_batch, i-1, epsilon)
     for j in iterations:
         it = iterations[int(j)]
-        last_batch = last_batch.append(phi_evolution[it])
+        last_batch.append(phi_evolution[it])
     return last_batch
 
 def update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min):
