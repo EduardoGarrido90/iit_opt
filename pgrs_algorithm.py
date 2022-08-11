@@ -8,7 +8,7 @@ def return_last_batch(phi_evolution, epsilon, i):
     init_batch = i - epsilon
     iterations = np.linspace(init_batch, i-1, epsilon)
     for j in iterations:
-        it = iterations[j]
+        it = iterations[int(j)]
         last_batch = last_batch.append(phi_evolution[it])
     return last_batch
 
