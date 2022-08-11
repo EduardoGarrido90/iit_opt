@@ -14,6 +14,7 @@ def main(D_min, D_max, T, seed, debug=True):
     best_phi = -1
     individuals = {}
     phis = np.zeros(T)
+    i=0
     while(i<T):
         print('Iteration ' + str(i))
         nodes = np.random.randint(D_min, D_max+1)

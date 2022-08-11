@@ -39,7 +39,7 @@ def sample_dimension(D_min, p_omega):
             break
     return dimension
 
-def main(D_min, D_max, epsilon, p_omega, mu, T, seed, debug=True):
+def main(D_min, D_max, epsilon, p_omega, mu, T, seed, debug=False):
     if debug:
         return None, None, None, None, None, None, np.random.randint(1, 100, T)
     print('Random search of matrices')
@@ -51,6 +51,8 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed, debug=True):
     individuals = {}
     phi_evolution = {}
     phis = np.zeros(T)
+    import pdb; pdb.set_trace();
+    i=0
     while(i<T):
         print('Iteration ' + str(i))
         k=0

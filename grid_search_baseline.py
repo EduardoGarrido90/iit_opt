@@ -26,6 +26,7 @@ def main(D_min, D_max, T, seed, debug=True):
         tpms[current_dimension] = np.array([np.fromstring(" ".join(i), sep=" ") for i in columns]).T
     dimension_index_tpm = 0
     previous_node=0
+    i=0
     while(i<T):
         print('Iteration ' + str(i))
         nodes = nodes_array[i]
