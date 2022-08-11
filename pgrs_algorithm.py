@@ -7,7 +7,7 @@ def return_last_batch(phi_evolution, epsilon, i):
     last_batch = []
     init_batch = i - epsilon
     iterations = np.linspace(init_batch, i-1, epsilon)
-    for j in range(iterations):
+    for j in iterations:
         it = iterations[j]
         last_batch = last_batch.append(phi_evolution[it])
     return last_batch
@@ -51,7 +51,6 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed, debug=False):
     individuals = {}
     phi_evolution = {}
     phis = np.zeros(T)
-    import pdb; pdb.set_trace();
     i=0
     while(i<T):
         print('Iteration ' + str(i))
@@ -84,6 +83,7 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed, debug=False):
                 best_state = best_local_state
             i=i+1
         print('Updating prior distribution')
+        import pdb; pdb.set_trace();
         p_omega = update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min)
 
     print('Prior Guided Random search finished')
