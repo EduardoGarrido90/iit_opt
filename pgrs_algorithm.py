@@ -18,7 +18,7 @@ def update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min):
     penalizations = np.linspace(1, -1, len(phi_results)) * mu
     i=0
     for result in phi_results:
-        p_omega[result[1]] = p_omega[result[1]] + penalizations[i]
+        p_omega[result[1]-D_min] = p_omega[result[1]-D_min] + penalizations[i]
         i=i+1
     #Normalization.
     normalized_p_omega = np.zeros(p_omega.shape[0])
