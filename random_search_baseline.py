@@ -3,7 +3,7 @@ import numpy as np
 import itertools
 import random
 
-def main(D_min, D_max, T, seed, debug=True):
+def main(D_min, D_max, T, seed, debug=False):
     if debug:
         return None, None, None, None, None, np.random.randint(1, 100, T)
     print('Random search of matrices')
@@ -44,8 +44,8 @@ def main(D_min, D_max, T, seed, debug=True):
         i=i+1
 
     print('Random search finished')
-    print('All individuals')
-    print(individuals)
+    #print('All individuals')
+    #print(individuals)
     print('Best result')
     print('phi: ' + str(best_phi))
     print('cm: ' + str(best_cm))

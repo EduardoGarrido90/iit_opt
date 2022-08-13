@@ -3,7 +3,7 @@ import numpy as np
 import itertools
 import random
 
-def main(D_min, D_max, T, seed, debug=True):
+def main(D_min, D_max, T, seed, debug=False):
     if debug:
         return None, None, None, None, None, np.random.randint(1, 100, T)
     print('Grid search of matrices')

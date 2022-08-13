@@ -19,14 +19,18 @@ def update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min, kappa):
     i=0
     for result in phi_results:
         p_omega[result[1]-D_min] = p_omega[result[1]-D_min] + penalizations[i]
+        if(p_omega[result[1]-D_min]<0):
+            p_omega[result[1]-D_min]=0
+        if(p_omega[result[1]-D_min]>1):
+            p_omega[result[1]-D_min]=1
         i=i+1
     #Normalization.
     normalized_p_omega = np.zeros(p_omega.shape[0])
-    i=0
-    for prior_value in p_omega:
-        normalized_p_omega[i] = (prior_value - min(p_omega)) / (max(p_omega) - min(p_omega))
-        i=i+1
-    normalized_p_omega = normalized_p_omega / sum(normalized_p_omega)
+    #i=0
+    #for prior_value in p_omega:
+    #    normalized_p_omega[i] = (prior_value - min(p_omega)) / (max(p_omega) - min(p_omega))
+    #    i=i+1
+    normalized_p_omega = p_omega / sum(p_omega)
     eps = 0.02
     #Smoothing
     normalized_p_omega[np.argmax(normalized_p_omega)] = normalized_p_omega[np.argmax(normalized_p_omega)] - kappa
@@ -47,7 +51,9 @@ def sample_dimension(D_min, p_omega):
 def main(D_min, D_max, epsilon, p_omega, mu, T, seed, kappa=0.02, debug=False):
     if debug:
         return None, None, None, None, None, None, np.random.randint(1, 100, T)
-    print('Random search of matrices')
+    print('Prior Guided Random search of matrices')
+    print('Initial prior')
+    print(p_omega)
     random.seed(seed)
     best_cm = []
     best_tpm = []
@@ -58,9 +64,9 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed, kappa=0.02, debug=False):
     phis = np.zeros(T)
     i=0
     while(i<T):
-        print('Iteration ' + str(i))
         k=0
         for k in range(0, epsilon):
+            print('Iteration ' + str(i*epsilon+k)
             nodes = sample_dimension(D_min, p_omega)
             states = list(itertools.product([0, 1], repeat=nodes))
             tpm_dim = 2**nodes
@@ -89,6 +95,8 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed, kappa=0.02, debug=False):
             i=i+1
         print('Updating prior distribution')
         p_omega = update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min, kappa)
+        print('New prior')
+        print(p_omega)
 
     print('Prior Guided Random search finished')
     print('Best result')
