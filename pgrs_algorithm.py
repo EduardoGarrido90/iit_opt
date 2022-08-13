@@ -12,7 +12,7 @@ def return_last_batch(phi_evolution, epsilon, i):
         last_batch.append(phi_evolution[it])
     return last_batch
 
-def update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min):
+def update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min, kappa):
     phi_results = return_last_batch(phi_evolution, epsilon, i)
     phi_results = sorted(phi_results, reverse=True)
     penalizations = np.linspace(1, -1, len(phi_results)) * mu
@@ -26,6 +26,12 @@ def update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min):
     for prior_value in p_omega:
         normalized_p_omega[i] = (prior_value - min(p_omega)) / (max(p_omega) - min(p_omega))
         i=i+1
+    normalized_p_omega = normalized_p_omega / sum(normalized_p_omega)
+    eps = 0.02
+    import pdb; pdb.set_trace();
+    #Smoothing
+    normalized_p_omega[np.argmax(normalized_p_omega)] = normalized_p_omega[np.argmax(normalized_p_omega)] - kappa
+    normalized_p_omega[np.argmin(normalized_p_omega)] = normalized_p_omega[np.argmin(normalized_p_omega)] + kappa
     return normalized_p_omega
 
 def sample_dimension(D_min, p_omega):
@@ -39,7 +45,7 @@ def sample_dimension(D_min, p_omega):
             break
     return dimension
 
-def main(D_min, D_max, epsilon, p_omega, mu, T, seed, debug=False):
+def main(D_min, D_max, epsilon, p_omega, mu, T, seed, kappa=0.02, debug=False):
     if debug:
         return None, None, None, None, None, None, np.random.randint(1, 100, T)
     print('Random search of matrices')
@@ -83,8 +89,7 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed, debug=False):
                 best_state = best_local_state
             i=i+1
         print('Updating prior distribution')
-        import pdb; pdb.set_trace();
-        p_omega = update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min)
+        p_omega = update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min, kappa)
 
     print('Prior Guided Random search finished')
     print('All individuals')
