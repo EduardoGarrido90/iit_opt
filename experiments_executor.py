@@ -26,10 +26,10 @@ pgrs_results = []
 rs_results = []
 gs_results = []
 for iteration in range(iterations_experiment):
-    best_phi, best_cm, best_tpm, best_state, individuals, phi_evolution, phis = pgrs.main(D_min, D_max, epsilon, p_omega, mu, T, iteration)#, debug=True)
-    pgrs_results.append(phis)
-    best_phi, best_cm, best_tpm, best_state, individuals, phis = rs.main(D_min, D_max, T, iteration)#, debug=True) 
-    rs_results.append(phis)
+    #best_phi, best_cm, best_tpm, best_state, individuals, phi_evolution, phis = pgrs.main(D_min, D_max, epsilon, p_omega, mu, T, iteration)#, debug=True)
+    #pgrs_results.append(phis)
+    #best_phi, best_cm, best_tpm, best_state, individuals, phis = rs.main(D_min, D_max, T, iteration)#, debug=True) 
+    #rs_results.append(phis)
     best_phi, best_cm, best_tpm, best_state, individuals, phis = gs.main(D_min, D_max, T, iteration)#, debug=True)
     gs_results.append(phis)
 mean_pgrs_results = np.mean(pgrs_results, axis=0)

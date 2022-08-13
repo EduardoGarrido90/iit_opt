@@ -15,13 +15,14 @@ def main(D_min, D_max, T, seed, debug=False):
     individuals = {}
     phis = np.zeros(T)
     space_range = D_max - D_min + 1
-    iterations_for_dimension = T/float(space_range)
+    iterations_for_dimension = int(T/float(space_range))
     nodes_array = np.repeat(np.linspace(D_min, D_max, space_range), iterations_for_dimension)
     tpms = {}
     for sp in range(space_range):
         current_dimension = sp + D_min
         tpm_x = 2**current_dimension
         tpm_y = current_dimension
+        import pdb; pdb.set_trace();
         columns = np.array([np.binary_repr(i, width=2**tpm_x) for i in np.linspace(0, 2**tpm_x, tpm_y*iterations_for_dimension).astype(int)])
         tpms[current_dimension] = np.array([np.fromstring(" ".join(i), sep=" ") for i in columns]).T
     dimension_index_tpm = 0
