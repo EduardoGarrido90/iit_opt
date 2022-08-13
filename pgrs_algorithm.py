@@ -66,7 +66,7 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed, kappa=0.02, debug=False):
     while(i<T):
         k=0
         for k in range(0, epsilon):
-            print('Iteration ' + str(i*epsilon+k)
+            print('Iteration ' + str(i))
             nodes = sample_dimension(D_min, p_omega)
             states = list(itertools.product([0, 1], repeat=nodes))
             tpm_dim = 2**nodes
