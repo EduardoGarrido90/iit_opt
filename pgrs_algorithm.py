@@ -92,6 +92,7 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed, kappa=0.02, debug=False):
                 best_cm = cm
                 best_tpm = tpm
                 best_state = best_local_state
+            print(best_phi)
             i=i+1
         print('Updating prior distribution')
         p_omega = update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min, kappa)

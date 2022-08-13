@@ -57,6 +57,7 @@ def main(D_min, D_max, T, seed, debug=False):
             best_cm = cm
             best_tpm = tpm
             best_state = best_local_state
+        print(best_phi)
         i=i+1
 
     print('Grid search finished')
