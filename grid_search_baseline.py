@@ -22,25 +22,28 @@ def main(D_min, D_max, T, seed, debug=False):
         current_dimension = sp + D_min
         tpm_x = 2**current_dimension
         tpm_y = current_dimension
-        import pdb; pdb.set_trace();
-        columns = np.array([np.binary_repr(i, width=2**tpm_x) for i in np.linspace(0, 2**tpm_x, tpm_y*iterations_for_dimension).astype(int)])
+        columns = np.array([np.binary_repr(i, width=int(np.log2(2**tpm_x)+1)) for i in np.linspace(0, 2**tpm_x, tpm_y*iterations_for_dimension).astype(int)])
         tpms[current_dimension] = np.array([np.fromstring(" ".join(i), sep=" ") for i in columns]).T
-    dimension_index_tpm = 0
+        np.random.shuffle(tpms[current_dimension])
+    dimension_index_tpm_x = 0
+    dimension_index_tpm_y = 0
     previous_node=0
     i=0
     while(i<T):
         print('Iteration ' + str(i))
-        nodes = nodes_array[i]
+        nodes = int(nodes_array[i])
         states = list(itertools.product([0, 1], repeat=nodes))
         tpm_dim = 2**nodes
         if previous_node != 0 and previous_node != nodes:
-            dimension_index_tpm=0
+            dimension_index_tpm_x=0
+            dimension_index_tpm_y=0
         previous_node = nodes
-        tpm = tpms[nodes][:,dimension_index_tpm:dimension_index_tpm+tpm_y]
-        dimension_index_tpm = dimension_index_tpm + tpm_y
+        tpm = tpms[nodes][:-1,dimension_index_tpm_y:dimension_index_tpm_y+tpm_y-1].astype(int)
+        dimension_index_tpm_x = dimension_index_tpm_x + tpm_x
+        dimension_index_tpm_y = dimension_index_tpm_y + tpm_y
         cm = np.random.randint(0,2,nodes*nodes).reshape((nodes,nodes))
         j=0
-        best_local_phi = -1
+        best_local_phi = 0
         best_local_state = states[0]
         while(j<len(states)):
             try:

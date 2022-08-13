@@ -23,7 +23,7 @@ def main(D_min, D_max, T, seed, debug=False):
         tpm = np.random.randint(0,2,tpm_dim*nodes).reshape((tpm_dim,nodes))
         cm = np.random.randint(0,2,nodes*nodes).reshape((nodes,nodes))
         j=0
-        best_local_phi = -1
+        best_local_phi = 0
         best_local_state = states[0]
         while(j<len(states)):
             try:
