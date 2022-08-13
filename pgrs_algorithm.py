@@ -7,8 +7,8 @@ def return_last_batch(phi_evolution, epsilon, i):
     last_batch = []
     init_batch = i - epsilon
     iterations = np.linspace(init_batch, i-1, epsilon)
-    for j in iterations:
-        it = iterations[int(j)]
+    for j in range(len(iterations)):
+        it = iterations[j]
         last_batch.append(phi_evolution[it])
     return last_batch
 
@@ -28,7 +28,6 @@ def update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min, kappa):
         i=i+1
     normalized_p_omega = normalized_p_omega / sum(normalized_p_omega)
     eps = 0.02
-    import pdb; pdb.set_trace();
     #Smoothing
     normalized_p_omega[np.argmax(normalized_p_omega)] = normalized_p_omega[np.argmax(normalized_p_omega)] - kappa
     normalized_p_omega[np.argmin(normalized_p_omega)] = normalized_p_omega[np.argmin(normalized_p_omega)] + kappa
@@ -92,8 +91,6 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed, kappa=0.02, debug=False):
         p_omega = update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min, kappa)
 
     print('Prior Guided Random search finished')
-    print('All individuals')
-    print(individuals)
     print('Best result')
     print('phi: ' + str(best_phi))
     print('cm: ' + str(best_cm))

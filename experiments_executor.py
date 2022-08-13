@@ -12,7 +12,7 @@ D_max=4
 epsilon=5
 p_omega = np.array([0.2,0.8])
 mu=0.5
-T=10
+T=100
 #Experiment 2:
 #iterations_experiment = 25
 #D_min=3
