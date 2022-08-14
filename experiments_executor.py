@@ -23,21 +23,33 @@ T=20
 #mu=0.2
 #T=20
 pgrs_results = []
+pgrs_best_results = []
 rs_results = []
+rs_best_results = []
 gs_results = []
+gs_best_results = []
 for iteration in range(iterations_experiment):
     best_phi, best_cm, best_tpm, best_state, individuals, phi_evolution, phis, best_phis = pgrs.main(D_min, D_max, epsilon, p_omega, mu, T, iteration)#, debug=True)
     pgrs_results.append(phis)
+    pgrs_best_results.append(best_phis)
     best_phi, best_cm, best_tpm, best_state, individuals, phis, best_phis = rs.main(D_min, D_max, T, iteration)#, debug=True) 
     rs_results.append(phis)
+    rs_best_results.append(best_phis)
     best_phi, best_cm, best_tpm, best_state, individuals, phis, best_phis = gs.main(D_min, D_max, T, iteration)#, debug=True)
     gs_results.append(phis)
+    gs_best_results.append(best_phis)
 mean_pgrs_results = np.mean(pgrs_results, axis=0)
+mean_best_pgrs_results = np.mean(pgrs_best_results, axis=0)
 mean_rs_results = np.mean(rs_results, axis=0)
+mean_best_rs_results = np.mean(rs_best_results, axis=0)
 mean_gs_results = np.mean(gs_results, axis=0)
+mean_best_gs_results = np.mean(gs_best_results, axis=0)
 std_pgrs_results = np.std(pgrs_results, axis=0)
+std_best_pgrs_results = np.std(pgrs_best_results, axis=0)
 std_rs_results = np.std(rs_results, axis=0)
+std_best_rs_results = np.std(rs_best_results, axis=0)
 std_gs_results = np.std(gs_results, axis=0)
+std_best_gs_results = np.std(gs_best_results, axis=0)
 print('PGRS single max across exps.')
 print(max([item for sublist in pgrs_results for item in sublist]))
 print('RS single max across exps.')
