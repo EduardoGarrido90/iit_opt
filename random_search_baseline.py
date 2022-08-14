@@ -7,13 +7,14 @@ def main(D_min, D_max, T, seed, debug=False):
     if debug:
         return None, None, None, None, None, np.random.randint(1, 100, T)
     print('Random search of matrices')
-    random.seed(seed)
+    np.random.seed(seed)
     best_cm = []
     best_tpm = []
     best_state = []
     best_phi = -1
     individuals = {}
     phis = np.zeros(T)
+    best_phis = np.zeros(T)
     i=0
     while(i<T):
         print('Iteration ' + str(i))
@@ -35,12 +36,13 @@ def main(D_min, D_max, T, seed, debug=False):
                 pass
             j=j+1
         individuals[i] = [{'phi': best_local_phi}, {'cm' : cm}, {'tpm' : tpm}, {'state': best_local_state}, {'nodes' : nodes}] 
-        phis[i] = best_local_phi
+        best_phis[i] = best_local_phi
         if best_local_phi > best_phi:
             best_phi = best_local_phi
             best_cm = cm
             best_tpm = tpm
             best_state = best_local_state
+        phis[i] = best_phi
         print(best_phi)
         i=i+1
 
@@ -52,7 +54,7 @@ def main(D_min, D_max, T, seed, debug=False):
     print('cm: ' + str(best_cm))
     print('tpm: ' + str(best_tpm))
     print('state: ' + str(best_state))
-    return best_phi, best_cm, best_tpm, best_state, individuals, phis
+    return best_phi, best_cm, best_tpm, best_state, individuals, phis, best_phis
 
 def test():
     print('It works')

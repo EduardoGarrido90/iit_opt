@@ -54,7 +54,7 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed, kappa=0.02, debug=False):
     print('Prior Guided Random search of matrices')
     print('Initial prior')
     print(p_omega)
-    random.seed(seed)
+    np.random.seed(seed)
     best_cm = []
     best_tpm = []
     best_state = []
@@ -62,6 +62,7 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed, kappa=0.02, debug=False):
     individuals = {}
     phi_evolution = {}
     phis = np.zeros(T)
+    best_phis = np.zeros(T)
     i=0
     while(i<T):
         k=0
@@ -85,14 +86,15 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed, kappa=0.02, debug=False):
                     pass
                 j=j+1
             phi_evolution[i] = [best_local_phi, nodes]
-            phis[i] = best_local_phi
             individuals[i] = [{'phi': best_local_phi}, {'cm' : cm}, {'tpm' : tpm}, {'state': best_local_state}, {'nodes' : nodes}] 
+            phis[i] = best_local_phi
             if best_local_phi > best_phi:
                 best_phi = best_local_phi
                 best_cm = cm
                 best_tpm = tpm
                 best_state = best_local_state
             print(best_phi)
+            best_phis[i] = best_phi
             i=i+1
         print('Updating prior distribution')
         p_omega = update_prior(p_omega, phi_evolution, mu, epsilon, i, D_min, kappa)
@@ -105,7 +107,7 @@ def main(D_min, D_max, epsilon, p_omega, mu, T, seed, kappa=0.02, debug=False):
     print('cm: ' + str(best_cm))
     print('tpm: ' + str(best_tpm))
     print('state: ' + str(best_state))
-    return best_phi, best_cm, best_tpm, best_state, individuals, phi_evolution, phis
+    return best_phi, best_cm, best_tpm, best_state, individuals, phi_evolution, phis, best_phis
 
 def test():
     print('It works')

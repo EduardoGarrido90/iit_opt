@@ -7,13 +7,14 @@ def main(D_min, D_max, T, seed, debug=False):
     if debug:
         return None, None, None, None, None, np.random.randint(1, 100, T)
     print('Grid search of matrices')
-    random.seed(seed)
+    np.random.seed(seed)
     best_cm = []
     best_tpm = []
     best_state = []
     best_phi = -1
     individuals = {}
     phis = np.zeros(T)
+    best_phis = np.zeros(T)
     space_range = D_max - D_min + 1
     iterations_for_dimension = int(T/float(space_range))
     nodes_array = np.repeat(np.linspace(D_min, D_max, space_range), iterations_for_dimension)
@@ -61,6 +62,7 @@ def main(D_min, D_max, T, seed, debug=False):
             best_cm = cm
             best_tpm = tpm
             best_state = best_local_state
+        best_phis[i] = best_phi
         print(best_phi)
         i=i+1
 
@@ -72,7 +74,7 @@ def main(D_min, D_max, T, seed, debug=False):
     print('cm: ' + str(best_cm))
     print('tpm: ' + str(best_tpm))
     print('state: ' + str(best_state))
-    return best_phi, best_cm, best_tpm, best_state, individuals, phis
+    return best_phi, best_cm, best_tpm, best_state, individuals, phis, best_phis
 
 def test():
     print('It works')
