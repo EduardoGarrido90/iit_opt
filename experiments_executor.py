@@ -6,14 +6,14 @@ import plot_results as pr
 import numpy as np
 
 #Experiment 1:
-iterations_experiment = 5
+iterations_experiment = 25
 D_min=3
 D_max=4
 epsilon=5
 #p_omega = np.array([0.4,0.3,0.3])
-p_omega = np.array([0.4,0.6])
+p_omega = np.array([0.2,0.8])
 mu=0.1
-T=40
+T=100
 #Experiment 2:
 #iterations_experiment = 25
 #D_min=3
@@ -63,10 +63,10 @@ print(max(mean_rs_results))
 print('GS avg. max.')
 print(max(mean_gs_results))
 import pdb; pdb.set_trace();
-pr.plot_simple_experiment(pr.substitute_for_max(mean_pgrs_results))
-pr.plot_simple_experiment(pr.substitute_for_max(mean_rs_results))
-pr.plot_simple_experiment(pr.substitute_for_max(mean_gs_results))
-pr.plot_mean_and_std_dev(mean_pgrs_results, mean_rs_results, mean_gs_results, std_pgrs_results, std_rs_results, std_gs_results)
+#pr.plot_simple_experiment(pr.substitute_for_max(mean_pgrs_results))
+#pr.plot_simple_experiment(pr.substitute_for_max(mean_rs_results))
+#pr.plot_simple_experiment(pr.substitute_for_max(mean_gs_results))
+pr.plot_mean_and_std_dev(mean_best_pgrs_results, mean_best_rs_results, mean_best_gs_results, 0.1*std_best_pgrs_results, 0.1*std_best_rs_results, 0.1*std_best_gs_results)
 pr.persist_results('pgrs_2', mean_pgrs_results)
 pr.persist_results('rs_2', mean_rs_results)
 pr.persist_results('gs_2', mean_gs_results)
