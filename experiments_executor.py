@@ -13,7 +13,7 @@ epsilon=5
 #p_omega = np.array([0.4,0.3,0.3])
 p_omega = np.array([0.4,0.6])
 mu=0.1
-T=20
+T=40
 #Experiment 2:
 #iterations_experiment = 25
 #D_min=3

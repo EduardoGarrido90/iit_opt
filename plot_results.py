@@ -26,7 +26,7 @@ def plot_simple_experiment(phi_results):
 
 def plot_mean_and_std_dev(means_1, std_devs_1, means_2, std_devs_2, means_3, std_devs_3):
     iterations = means_1.shape[0]
-    x = np.linspace(1, iterations, iterations)
+    x = np.linspace(1, iterations, iterations).astype(int)
     fig, ax0 = plt.subplots(nrows=1, sharex=True)
     ax0.errorbar(x, means_1, yerr=std_devs_1, fmt='-o', label='PGRS')
     ax0.errorbar(x, means_2, yerr=std_devs_2, fmt='-o', label='RS')
