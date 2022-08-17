@@ -36,13 +36,13 @@ def main(D_min, D_max, T, seed, debug=False):
                 pass
             j=j+1
         individuals[i] = [{'phi': best_local_phi}, {'cm' : cm}, {'tpm' : tpm}, {'state': best_local_state}, {'nodes' : nodes}] 
-        best_phis[i] = best_local_phi
+        phis[i] = best_local_phi
         if best_local_phi > best_phi:
             best_phi = best_local_phi
             best_cm = cm
             best_tpm = tpm
             best_state = best_local_state
-        phis[i] = best_phi
+        best_phis[i] = best_phi
         print(best_phi)
         i=i+1
 
