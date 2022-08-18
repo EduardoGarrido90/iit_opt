@@ -23,13 +23,13 @@ import numpy as np
 #mu=0.1
 #T=50
 #Experiment 3:
-iterations_experiment = 2
-D_min=5
-D_max=6
+iterations_experiment = 1
+D_min=4
+D_max=5
 epsilon=5
-p_omega = np.array([0.2,0.8])
+p_omega = np.array([0.3,0.7])
 mu=0.1
-T=50
+T=500
 pgrs_results = []
 pgrs_best_results = []
 rs_results = []
