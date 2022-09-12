@@ -24,12 +24,12 @@ import numpy as np
 #T=50
 #Experiment 3:
 iterations_experiment = 1
-D_min=3
-D_max=4
+D_min=4
+D_max=5
 epsilon=5
 p_omega = np.array([0.3,0.7])
 mu=0.1
-T=5
+T=250
 pgrs_results = []
 pgrs_best_results = []
 rs_results = []
@@ -37,7 +37,7 @@ rs_best_results = []
 #gs_results = []
 #gs_best_results = []
 for iteration in range(iterations_experiment):
-    best_phi, best_cm, best_tpm, best_state, individuals, phi_evolution, phis, best_phis = pgrs.main(D_min, D_max, epsilon, p_omega, mu, T, iteration)#, debug=True)
+    best_phi, best_cm, best_tpm, best_state, individuals, phi_evolution, phis, best_phis = pgrs.main(D_min, D_max, epsilon, p_omega, mu, T, iteration+1)#, debug=True)
     pgrs_results.append(phis)
     pgrs_best_results.append(best_phis)
     #best_phi, best_cm, best_tpm, best_state, individuals, phis, best_phis = rs.main(D_min, D_max, T, iteration)#, debug=True) 
